@@ -16,7 +16,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Color _color;
   Color _selectedColor;
-  var _buttonTextStyle;
 
   Color getOppositeColor(Color color) {
     var oppositeColor = Color.fromRGBO(
@@ -31,11 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _selectedColor = Colors.cyan;
-    _buttonTextStyle = TextStyle(
-      color: getOppositeColor(
-        _selectedColor,
-      ),
-    );
     super.initState();
   }
 
@@ -43,8 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: _selectedColor != null ? _selectedColor : Theme.of(context).primaryColor,
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: _selectedColor,
+          ),
+        ),
+        backgroundColor: _selectedColor != null
+            ? getOppositeColor(
+                _selectedColor,
+              )
+            : Theme.of(context).primaryColor,
       ),
       body: Container(
         width: double.infinity,
@@ -75,7 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: _selectedColor,
                 child: Text(
                   'choose Color',
-                  style: _buttonTextStyle,
+                  style: TextStyle(
+                    color: getOppositeColor(
+                      _selectedColor,
+                    ),
+                  ),
                 ),
                 onPressed: () {
                   showDialog(
@@ -117,7 +124,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               onPressed: () {
                                 Navigator.of(context).pop(_color);
                               },
-                              child: Text('Select color'),
+                              color: _selectedColor,
+                              child: Text(
+                                'Select color',
+                                style: TextStyle(
+                                  color: getOppositeColor(
+                                    _selectedColor,
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -125,7 +140,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ).then((selectedColor) {
                     setState(() {
+                      if(_selectedColor!=null)
                       _selectedColor = selectedColor;
+                      else _selectedColor=Colors.black;
                     });
                   });
                 },
@@ -144,7 +161,11 @@ class _MyHomePageState extends State<MyHomePage> {
         color: _selectedColor,
         child: Text(
           title,
-          style: _buttonTextStyle,
+          style: TextStyle(
+            color: getOppositeColor(
+              _selectedColor,
+            ),
+          ),
         ),
         onPressed: () {
           Navigator.of(context).pushNamed(
