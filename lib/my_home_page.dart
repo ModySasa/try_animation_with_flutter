@@ -140,9 +140,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ).then((selectedColor) {
                     setState(() {
-                      if(_selectedColor!=null)
-                      _selectedColor = selectedColor;
-                      else _selectedColor=Colors.black;
+                      if (selectedColor != null)
+                        _selectedColor = selectedColor;
+                      else
+                        _selectedColor = Colors.black;
                     });
                   });
                 },
