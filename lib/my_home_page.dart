@@ -16,6 +16,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Color _color;
   Color _selectedColor;
+  var _buttonTextStyle;
+
+  Color getOppositeColor(Color color) {
+    var oppositeColor = Color.fromRGBO(
+      255 - color.red,
+      255 - color.green,
+      255 - color.blue,
+      color.opacity,
+    );
+    return oppositeColor;
+  }
+
+  @override
+  void initState() {
+    _selectedColor = Colors.cyan;
+    _buttonTextStyle = TextStyle(
+      color: getOppositeColor(
+        _selectedColor,
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: MediaQuery.of(context).size.width * 2 / 4,
               child: FlatButton(
-                color: Colors.cyanAccent,
+                color: _selectedColor,
                 child: Text(
                   'choose Color',
+                  style: _buttonTextStyle,
                 ),
                 onPressed: () {
                   showDialog(
@@ -118,9 +141,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       width: MediaQuery.of(context).size.width * 2 / 4,
       child: FlatButton(
-        color: Colors.cyanAccent,
+        color: _selectedColor,
         child: Text(
           title,
+          style: _buttonTextStyle,
         ),
         onPressed: () {
           Navigator.of(context).pushNamed(
