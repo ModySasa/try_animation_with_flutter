@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'MyModules/cirlce_color_picker.dart';
+import 'MyModules/Clock/clock_widget.dart';
 import 'animations_screens/animated_list.dart';
 import 'animations_screens/animated_transitions.dart';
 import 'animations_screens/gesture_detector.dart';
@@ -54,6 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            ClockWidget(
+              textColor: getOppositeColor(
+                _selectedColor,
+              ),
+              backGroundColor: _selectedColor,
+            ),
             moveToPage(
               context,
               'Animated Transions',

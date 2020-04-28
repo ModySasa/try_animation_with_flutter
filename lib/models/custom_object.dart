@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:try_animation_with_flutter/MyModules/methods.dart';
 
 class CustomObject {
   String id;
@@ -24,25 +25,5 @@ class CustomObject {
     this.color = randomColor();
     this.name = 'number ${this.id}';
     this.iconData = randomIcon();
-  }
-
-  Color randomColor() {
-    List<Color> colors = [...Colors.primaries,...Colors.accents];
-    return colors[Random.secure().nextInt(colors.length)];
-  }
-
-  IconData randomIcon() {
-    List<IconData> icons = [
-      Icons.ac_unit,
-      Icons.label,
-      Icons.home,
-      Icons.accessibility,
-      Icons.add,
-      Icons.adjust,
-      Icons.attach_money,
-      Icons.border_top,
-      Icons.casino
-    ];
-    return icons[Random.secure().nextInt(icons.length)];
   }
 }
